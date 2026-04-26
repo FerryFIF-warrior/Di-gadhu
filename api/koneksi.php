@@ -4,40 +4,34 @@ $port       = (int)(getenv('DB_PORT') ?: 4000);
 $username   = getenv('DB_USER') ?: '';
 $password   = getenv('DB_PASSWORD') ?: '';
 $dbname     = getenv('DB_NAME') ?: 'DiGadhu';
-$caCert     = getenv('DB_CA_CERT');
 
 $conn = null;
 
-if (!empty($caCert)) {
+$conn = mysqli_init();
+if ($conn) {
     
-    $caFile = tempnam(sys_get_temp_dir(), 'tidb_ca_');
-    if ($caFile !== false) {
-        file_put_contents($caFile, $caCert);
-        
-        $conn = mysqli_init();
-        if ($conn) {
-            
-            $conn->ssl_set(null, null, $caFile, null, null);
-            
-            if (!$conn->real_connect($servername, $username, $password, $dbname, $port, null, MYSQLI_CLIENT_SSL)) {
-                error_log("Koneksi SSL gagal: " . $conn->connect_error);
-                $conn = null;
-            } else {
-                $conn->set_charset("utf8mb4");
-                error_log("Koneksi ke TiDB Cloud BERHASIL dengan SSL");
-            }
-        }
-        
+    if (defined('MYSQLI_OPT_SSL_VERIFY_SERVER_CERT')) {
+        $conn->options(MYSQLI_OPT_SSL_VERIFY_SERVER_CERT, false);
+    }
+    
+    $flags = MYSQLI_CLIENT_SSL;
+    if (defined('MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT')) {
+        $flags = MYSQLI_CLIENT_SSL_DONT_VERIFY_SERVER_CERT;
+    }
+    
+    if (!$conn->real_connect($servername, $username, $password, $dbname, $port, null, $flags)) {
+        error_log("Koneksi SSL (skip verify) gagal: " . $conn->connect_error);
+        $conn = null;
     } else {
-        error_log("Gagal membuat file temporary untuk CA certificate");
+        $conn->set_charset("utf8mb4");
+        error_log("Koneksi ke TiDB Cloud BERHASIL (SSL skip verify)");
     }
 }
 
 if ($conn === null) {
-    error_log("Mencoba koneksi tanpa SSL (hanya untuk debug)");
     $conn = @new mysqli($servername, $username, $password, $dbname, $port);
     if ($conn->connect_error) {
-        error_log("Koneksi tanpa SSL gagal: " . $conn->connect_error);
+        error_log("Koneksi tanpa SSL juga gagal: " . $conn->connect_error);
         $conn = null;
     } else {
         $conn->set_charset("utf8mb4");
