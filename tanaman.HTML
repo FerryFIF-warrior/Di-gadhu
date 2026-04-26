@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenis Tanaman - DI-GADHU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --dark-green: #1f3d2b;
+            --forest-green: #2f5d3a;
+            --leaf-green: #4f8a5b;
+            --light-green: #8ccf9b;
+            --water-blue: #4aa3c7;
+            --soil-brown: #8b6b4c;
+            --soft-cream: #f4f1e6;
+        }
+        body {
+            background: var(--soft-cream);
+        }
+        /* Glass Navbar */
+        .glass-navbar {
+            background: rgba(31, 61, 43, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        /* Card hover effect */
+        .plant-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .plant-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.02);
+        }
+        /* Fade-in animation for cards */
+        .card-enter {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen">
+
+    <!-- Glass Navbar -->
+    <nav class="glass-navbar fixed w-full z-10 p-4 flex justify-between text-white">
+        <div class="flex items-center gap-2">
+            <img src="Resource/Logo2.png" alt="Logo" class="w-10 h-10 object-contain">
+            <h2 class="tracking-wide" style="color: var(--light-green);">DI-GADHU</h2>
+        </div>
+        <ul class="flex gap-6">
+            <li><a href="api/mainMenu.php" class="hover:text-light-green">Beranda</a></li>
+            <li><a href="kosong" class="hover:text-light-green">Budidaya</a></li>
+            <li><a href="tanaman.HTML" class="text-light-green font-semibold">Jenis Tanaman</a></li>
+            <li><a href="analisis.HTML" class="hover:text-light-green">Analisis</a></li>
+        </ul>
+    </nav>
+
+    <section class="max-w-6xl mx-auto py-16 px-6 pt-32">
+        <h1 class="text-3xl font-bold mb-10" style="color: var(--forest-green);">Jenis Tanaman</h1>
+        <div id="tanamanContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    </section>
+
+    <script src="tanaman.js"></script>
+</body>
+</html>
