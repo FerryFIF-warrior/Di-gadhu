@@ -1,6 +1,6 @@
 <?php
 
-$servername = getenv('DB_HOST') ?: 'gateway01.ap-southeast-1.prod.aws.tidbcloud.com';
+$servername = getenv('DB_HOST') ?: 'gateway01.ap-southeast-1.prod.alicloud.tidbcloud.com';
 $port       = (int)(getenv('DB_PORT') ?: 4000);
 $username   = getenv('DB_USER') ?: '';
 $password   = getenv('DB_PASSWORD') ?: '';
