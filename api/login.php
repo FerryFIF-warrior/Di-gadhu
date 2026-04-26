@@ -3,7 +3,11 @@ session_start();
 require_once 'koneksi.php';
 if (!$conn) {
     $error = "Koneksi database bermasalah. silahkan cobalagi nanti!!";
+
+    goto skip_db_process;
 } 
+
+skip_db_process:
 
 if (isset($_SESSION['user_id'])) {
     if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
