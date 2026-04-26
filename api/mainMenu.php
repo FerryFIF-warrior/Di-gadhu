@@ -124,7 +124,7 @@ $conn->close();
 
         <div class="card1">
             <div class="card2">
-                <img src="../Resource/padi.png" alt="Padi">
+                <img src="../Resource/Padi.png" alt="Padi">
                 <h3>Padi</h3>
                 <p>Rekomendasi jadwal tanam ketika curah hujan sedang sampai tinggi.</p>
             </div>
