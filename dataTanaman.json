@@ -3,7 +3,7 @@
         {
             "id": "padi",
             "nama": "Padi",
-            "gambar": "Resource/padi.png",
+            "gambar": "Resource/Padi.png",
             "suhuIdeal": "24-30°C",
             "kelembapanIdeal": "70-85%",
             "curahHujan": "Tinggi",
@@ -17,7 +17,7 @@
         {
             "id": "jagung",
             "nama": "Jagung",
-            "gambar": "Resource/jagung.png",
+            "gambar": "Resource/Jagung.png",
             "suhuIdeal": "23-32°C",
             "kelembapanIdeal": "60-80%",
             "curahHujan": "Sedang",
@@ -31,7 +31,7 @@
         {
             "id": "cabai",
             "nama": "Cabai",
-            "gambar": "Resource/cabai.png",
+            "gambar": "Resource/Cabai.png",
             "suhuIdeal": "24-30°C",
             "kelembapanIdeal": "60-70%",
             "curahHujan": "Rendah",
