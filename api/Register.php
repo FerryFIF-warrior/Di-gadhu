@@ -1,12 +1,18 @@
 <?php
-// register.php
 session_start();
 require_once 'koneksi.php';
+
+if (!$conn) {
+    $error = "Koneksi database sedang bermasalah. Silahkan coba lagi nanti!!";
+
+    goto skip_db_process;
+}
+
+skip_db_process;
 
 $error = '';
 $success = '';
 
-// Jika sudah login, redirect ke beranda
 if (isset($_SESSION['user_id'])) {
     header("Location: mainMenu.php");
     exit();
@@ -18,7 +24,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = $_POST['password'];
     $confirm_password = $_POST['confirm_password'];
 
-    // Validasi input
     if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
         $error = "Semua field harus diisi!";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
@@ -37,10 +42,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->num_rows > 0) {
             $error = "Username atau email sudah terdaftar!";
         } else {
-            //password
+
             $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
-            // Simpan ke database
+            
             $insert = $conn->prepare("INSERT INTO login (username, email, password) VALUES (?, ?, ?)");
             $insert->bind_param("sss", $username, $email, $hashed_password);
 
@@ -116,7 +121,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <nav class="bg-dark-green/70 backdrop-blur-sm fixed w-full z-10 p-4 flex justify-between items-center text-white">
         <div class="flex items-center gap-2">
-            <img src="/Di-Gadhu/Resource/Logo2.png" alt="logo" class="w-10 h-10 object-contain">
+            <img src="../Resource/Logo2.png" alt="logo" class="w-10 h-10 object-contain">
             <h2 class="text-light-green tracking-wide">DI-GADHU</h2>
         </div>
         <ul class="flex gap-6">
@@ -127,7 +132,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <div class="min-h-screen flex items-center justify-center px-4 pt-20">
         <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border-t-4 border-light-green">
             <div class="text-center mb-8">
-                <img src="/Di-Gadhu/Resource/Logo2.png" alt="Logo" class="w-20 h-20 mx-auto mb-3">
+                <img src="../Resource/Logo2.png" alt="Logo" class="w-20 h-20 mx-auto mb-3">
                 <h2 class="text-3xl font-bold text-dark-green">Daftar Akun Baru</h2>
                 <p class="text-gray-600 mt-2">Silakan isi data diri Anda</p>
             </div>
@@ -160,7 +165,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="w-full bg-forest-green hover:bg-leaf-green text-white font-semibold py-3 rounded-lg transition duration-300">Daftar</button>
             </form>
 
-            <!-- Pesan error atau sukses -->
             <?php if (!empty($error)): ?>
                 <div class="mt-4 text-center text-red-600"><?php echo htmlspecialchars($error); ?></div>
             <?php endif; ?>
