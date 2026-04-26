@@ -37,7 +37,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Di-Gadhu | System Prediksi Cuaca Lokal</title>
-    <link rel="stylesheet" href="/Di-Gadhu/style.css">
+    <link rel="stylesheet" href="../style.css">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
@@ -45,13 +45,13 @@ $conn->close();
 <body>
     <nav>
         <div class="logo-web">
-            <img src="/Di-Gadhu/Resource/Logo2.png" alt="Logo">
+            <img src="../Resource/Logo2.png" alt="Logo">
             <h2>DI-GADHU</h2>
         </div>
             <ul class="navigasi">
-                <li><a href="/Di-Gadhu/budidaya.html">Budidaya</a></li>
-                <li><a href="/Di-Gadhu/analisis.HTML">Analisis</a></li>
-                <li><a href="/Di-Gadhu/tanaman.HTML">Jenis Tanaman</a></li>
+                <li><a href="../budidaya.html">Budidaya</a></li>
+                <li><a href="../analisis.HTML">Analisis</a></li>
+                <li><a href="../tanaman.HTML">Jenis Tanaman</a></li>
                 <?php if ($isLoggedIn): ?>
                     <li class="user-menu">
                         <a href="#" class="user-profile">
@@ -63,11 +63,11 @@ $conn->close();
                             <?php if ($role === 'admin'): ?>
                                 <li><a href="adminDash.php"><i class="fas fa-tachometer-alt"></i> Dashboard Admin</a></li>
                             <?php endif; ?>
-                            <li><a href="/Di-Gadhu/api/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                            <li><a href="../api/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                         </ul>
                     </li>
                 <?php else: ?>
-                    <li><a href="/Di-Gadhu/api/login.php">Login</a></li>
+                    <li><a href="../api/login.php">Login</a></li>
                 <?php endif; ?>
             </ul>
     </nav>
@@ -84,7 +84,7 @@ $conn->close();
     <section class="analysis" id="analysis-section">
         <div class="analysis-container">
             <div class="analysis-left">
-                <img src="/Di-Gadhu/Resource/3.png" alt="karakter">
+                <img src="../Resource/3.png" alt="karakter">
             </div>
             <div class="analysis-right">
                 <h2>Analisis Jadwal Tanam</h2>
@@ -124,42 +124,42 @@ $conn->close();
 
         <div class="card1">
             <div class="card2">
-                <img src="/Di-Gadhu/Resource/padi.png" alt="Padi">
+                <img src="../Resource/padi.png" alt="Padi">
                 <h3>Padi</h3>
                 <p>Rekomendasi jadwal tanam ketika curah hujan sedang sampai tinggi.</p>
             </div>
             <div class="card2">
-                <img src="/Di-Gadhu/Resource/Jagung.png" alt="Jagung">
+                <img src="../Resource/Jagung.png" alt="Jagung">
                 <h3>Jagung</h3>
                 <p>Rekomendasi jadwal tanam setelah panen padi dengan curah hujan sedang sampai rendah.</p>
             </div>
             <div class="card2">
-                <img src="/Di-Gadhu/Resource/Cabai.png" alt="Cabai">
+                <img src="../Resource/Cabai.png" alt="Cabai">
                 <h3>Cabai</h3>
                 <p>Rekomendasi jadwal tanam ketika curah hujan rendah atau saat pergantian musim kemarau.</p>
             </div>
             <div class="card2">
-                <img src="/Di-Gadhu/Resource/Kacang-tanah.png" alt="Kacang Tanah">
+                <img src="../Resource/Kacang-tanah.png" alt="Kacang Tanah">
                 <h3>Kacang Tanah</h3>
                 <p>Rekomendasi jadwal tanam ketika musim kemarau panjang karena ketahanannya terhadap kemarau.</p>
             </div>
             <div class="card2">
-                <img src="/Di-Gadhu/Resource/Terong.png" alt="Terong">
+                <img src="../Resource/Terong.png" alt="Terong">
                 <h3>Terong</h3>
                 <p>Rekomendasi jadwal tanam ketika curah hujan rendah atau saat pergantian musim.</p>
             </div>
             <div class="card2">
-                <img src="/Di-Gadhu/Resource/Tomat.png" alt="Tomat">
+                <img src="../Resource/Tomat.png" alt="Tomat">
                 <h3>Tomat</h3>
                 <p>Rekomendasi jadwal tanam ketika mulai pergantian musim dari musim hujan ke kemarau</p>
             </div>
             <div class="card2">
-                <img src="/Di-Gadhu/Resource/Wortel.png" alt="wortel">
+                <img src="../Resource/Wortel.png" alt="wortel">
                 <h3>Wortel</h3>
                 <p>Rekomendasi jadwal tanam ketika awal musim kemarau sekitar buan april-juni atau september - oktober</p>
             </div>
             <div class="card2">
-                <img src="/Di-Gadhu/Resource/Bawang_putih.png" alt="Bawang Putih">
+                <img src="../Resource/Bawang_putih.png" alt="Bawang Putih">
                 <h3>Bawang Putih</h3>
                 <p>Rekomendasi jadwal tanam ketika suhu lingkungan sekitar memiliki suhu agak dingin lebih cocok di daerah dataran tinggi</p>
             </div>
@@ -207,6 +207,6 @@ $conn->close();
     <footer>
         <p>Ferry Iqbal Fuadi | V3925006 | Web Programing | 2026</p>
     </footer>
-    <script src="/Di-Gadhu/script.js"></script>
+    <script src="../script.js"></script>
 </body>
 </html>
