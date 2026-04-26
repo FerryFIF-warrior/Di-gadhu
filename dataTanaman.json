@@ -1,0 +1,46 @@
+{
+    "tanaman": [
+        {
+            "id": "padi",
+            "nama": "Padi",
+            "gambar": "Resource/padi.png",
+            "suhuIdeal": "24-30°C",
+            "kelembapanIdeal": "70-85%",
+            "curahHujan": "Tinggi",
+            "musim":"Musim hujan",
+            "tanah": "Lempung",
+            "deskripsi": "Tanaman pangan utama yang cocok ditanam pada musim hujan.",
+            "keunggulan":"Produktuvitas tinggi dan kebutuhan pangan utama.",
+            "statusCuacaHujan": "Sangat cocok",
+            "statusCuacaPanas": "cukup cocok"
+        },
+        {
+            "id": "jagung",
+            "nama": "Jagung",
+            "gambar": "Resource/jagung.png",
+            "suhuIdeal": "23-32°C",
+            "kelembapanIdeal": "60-80%",
+            "curahHujan": "Sedang",
+            "musim":"Musim Kemarau",
+            "tanah": "Gembur",
+            "deskripsi": "Tanaman serealia yang tumbuh baik di daerah tropis",
+            "keunggulan":"Tahan pada musim kemarau panjang dan pertumbuhan relatif cepat.",
+            "statusCuacaHujan": "Cocok dengan drainase baik",
+            "statusCuacaPanas": "Sangat cocok"
+        },
+        {
+            "id": "cabai",
+            "nama": "Cabai",
+            "gambar": "Resource/cabai.png",
+            "suhuIdeal": "24-30°C",
+            "kelembapanIdeal": "60-70%",
+            "curahHujan": "Rendah",
+            "musim":"Musim Kemarau",
+            "tanah": "Gembur",
+            "deskripsi": "Tanaman hortikurtura yang sensitif terhadap kelembapan tinggi.",
+            "keunggulan":"Harga jual tinggi dan hasil panen melimpah ketika musim panen.",
+            "statusCuacaHujan": "Kurang cocok",
+            "statusCuacaPanas": "Sangat cocok"
+        }
+]
+}
