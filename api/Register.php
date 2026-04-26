@@ -8,7 +8,7 @@ if (!$conn) {
     goto skip_db_process;
 }
 
-skip_db_process;
+skip_db_process:
 
 $error = '';
 $success = '';
