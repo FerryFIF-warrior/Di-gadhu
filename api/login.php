@@ -124,18 +124,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <nav class="bg-dark-green/70 backdrop-blur-sm fixed w-full z-10 p-4 flex justify-between items-center">
         <div class="flex items-center gap-2">
-            <img src="/Di-Gadhu/Resource/Logo2.png" alt="logo" class="w-10 h-10 object-contain">
+            <img src="../Resource/Logo2.png" alt="logo" class="w-10 h-10 object-contain">
             <h2 class="text-light-green tracking-wide">DI-GADHU</h2>
         </div>
         <ul class="flex gap-6">
-            <li><a href="/Di-Gadhu/index.html" class="text-light-green font-medium mb-2">Beranda</a></li>
+            <li><a href="../index.html" class="text-light-green font-medium mb-2">Beranda</a></li>
         </ul>
     </nav>
 
     <div class="min-h-screen flex items-center justify-center px-4 pt-20">
         <div class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border-t-4 border-light-green">
             <div class="text-center mb-8">
-                <img src="/Di-Gadhu/Resource/Logo2.png" alt="Logo" class="w-20 h-20 mx-auto mb-3">
+                <img src="../Resource/Logo2.png" alt="Logo" class="w-20 h-20 mx-auto mb-3">
                 <h2 class="text-3xl font-bold text-dark-green">Masuk ke DI-GADHU</h2>
                 <p class="text-gray-600 mt-2">Silakan masuk untuk melanjutkan</p>
             </div>
