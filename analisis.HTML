@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisis Tanaman - DI-GADHU</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --dark-green: #1f3d2b;
+            --forest-green: #2f5d3a;
+            --leaf-green: #4f8a5b;
+            --light-green: #8ccf9b;
+            --water-blue: #4aa3c7;
+            --soil-brown: #8b6b4c;
+            --soft-cream: #f4f1e6;
+        }
+
+        .bg-dark-green {background-color: var(--dark-green);}
+        .text-light-green {color: var(--light-green);}
+        .hover\:text-light-green:hover {color: var(--light-green);}
+    </style>
+</head>
+<body class="min-h-screen" style="background: var(--soft-cream);">
+
+    <!--navbar-->
+    <nav class="bg-dark-green backdrop-blur-sm fixed w-full z-10 p-4 flex justify-between text-white">
+        <div class="flex item-center gap-2">
+            <img src="Resource/Logo2.png" alt="Logo" class="w-10 h-10 objec-contain">
+            <h2 class="tracking-wide" style="color: var(--light-green);">DI-GADHU</h2>
+        </div>
+        <ul class="flex gap-6">
+            <li><a href="api/mainMenu.php" class="hover:text-light-green">Beranda</a></li>
+            <li><a href="kosong" class="hover:text-light-green">Budidaya</a></li>
+            <li><a href="tanaman.HTML" class="hover:text-light-green">Jenis Tanaman</a></li>
+            <li><a href="analisis.HTML" class="text-light-green font-semibold">Analisis</a></li>
+        </ul>
+    </nav>
+    <section class="max-w-6xl mx-auto px-6 py-12 pt-32">
+        <h1 class="text-3xl font-bold mb-10" style="color: var(--forest-green);">Sistem Analisis Jadwal Taman</h1>
+        <div class="grid md:grid-cols-2 gap-10">
+            <!--input-->
+            <div class="p-6 rounded-xl shadow-lg" style="background: white;">
+                <h2 class="text-xl font-semibold mb-6" style="color: var(--dark-green);">Input Data</h2>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Provinsi</label>
+                        <select id="provinsi" class="w-full border rounded-lg p-2">
+                            <option value="">-- Pilih Provinsi --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Kabupaten</label>
+                        <select id="kabupaten" class="w-full border rounded-lg p-2" disabled>
+                            <option value="">-- Pilih Kabupaten --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Kecamatan</label>
+                        <select id="kecamatan" class="w-full border rounded-lg p-2" disabled>
+                            <option value="">-- Pilih Kecamatan --</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium mb-1">Jenis Tanaman</label>
+
+                        <select id="tanamanSelect" class="w-full border rounded-lg p-2"></select>
+                    </div>
+                    <button onclick="jalankanAnalisis()" class="w-full text-white py-2 rounded-lg" style="background: var(--forest-green);">Mulai Analisis</button>
+                </div>
+            </div>
+
+            <!--Hasil-->
+            <div id="hasilAnalisisDetail" class="bg-white p-6 rounded-xl shadow-lg">
+                <p class="text-gray-500">Hasil analisis akan muncul disini</p>
+            </div>
+        </div>
+    </section>
+    <script src="/Di-Gadhu/analysis.js"></script>
+</body>
+</html>
