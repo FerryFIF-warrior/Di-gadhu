@@ -46,7 +46,7 @@ if (!$conn) {
     
                     //redirec
                     if ($user['role'] === 'admin') {
-                        header("Location: admindash.php");
+                        header("Location: adminDash.php");
                     } else {
                         header("Location: mainMenu.php");
                     }
