@@ -2,7 +2,7 @@
 async function apiCall(action, method = 'GET', body = null) {
     const options = { method, headers: { 'Content-Type': 'application/json' }, credentials: 'include'};
     if (body) options.body = JSON.stringify(body);
-    const response = await fetch(`/Di-gadhu/api/admin_api.php?action=${action}`, options);
+    const response = await fetch(`api/admin_api.php?action=${action}`, options);
 
     if (!response.ok) {
         const errorData = await response.json();
