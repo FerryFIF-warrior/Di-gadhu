@@ -2,12 +2,6 @@
 session_start();
 require_once 'koneksi.php';
 
-if (!$conn) {
-    $error = "Koneksi database sedang bermasalah. Silahkan coba lagi nanti!!";
-
-    goto skip_db_process;
-}
-
 skip_db_process:
 
 $error = '';
@@ -17,48 +11,50 @@ if (isset($_SESSION['user_id'])) {
     header("Location: mainMenu.php");
     exit();
 }
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-
-    if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
-        $error = "Semua field harus diisi!";
-    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        $error = "Format email tidak valid!";
-    } elseif (strlen($password) < 6) {
-        $error = "Password minimal 6 karakter!";
-    } elseif ($password !== $confirm_password) {
-        $error = "Konfirmasi password tidak cocok!";
-    } else {
-        
-        $stmt = $conn->prepare("SELECT id FROM login WHERE username = ? OR email = ?");
-        $stmt->bind_param("ss", $username, $email);
-        $stmt->execute();
-        $stmt->store_result();
-
-        if ($stmt->num_rows > 0) {
-            $error = "Username atau email sudah terdaftar!";
+if (!$conn) {
+    $error = "Koneksi database sedang bermasalah. Silahkan coba lagi nanti!!";
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = trim($_POST['username']);
+        $email = trim($_POST['email']);
+        $password = $_POST['password'];
+        $confirm_password = $_POST['confirm_password'];
+    
+        if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
+            $error = "Semua field harus diisi!";
+        } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = "Format email tidak valid!";
+        } elseif (strlen($password) < 6) {
+            $error = "Password minimal 6 karakter!";
+        } elseif ($password !== $confirm_password) {
+            $error = "Konfirmasi password tidak cocok!";
         } else {
-
-            $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
             
-            $insert = $conn->prepare("INSERT INTO login (username, email, password) VALUES (?, ?, ?)");
-            $insert->bind_param("sss", $username, $email, $hashed_password);
-
-            if ($insert->execute()) {
-                header("Location: login.php?status=sukses");
-                
-                exit();
+            $stmt = $conn->prepare("SELECT id FROM login WHERE username = ? OR email = ?");
+            $stmt->bind_param("ss", $username, $email);
+            $stmt->execute();
+            $stmt->store_result();
+    
+            if ($stmt->num_rows > 0) {
+                $error = "Username atau email sudah terdaftar!";
             } else {
-                $error = "Terjadi kesalahan: " . $insert->error;
+    
+                $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+    
+                
+                $insert = $conn->prepare("INSERT INTO login (username, email, password) VALUES (?, ?, ?)");
+                $insert->bind_param("sss", $username, $email, $hashed_password);
+    
+                if ($insert->execute()) {
+                    header("Location: login.php?status=sukses");
+                    
+                    exit();
+                } else {
+                    $error = "Terjadi kesalahan: " . $insert->error;
+                }
+                $insert->close();
             }
-            $insert->close();
+            $stmt->close();
         }
-        $stmt->close();
     }
 }
 ?>
