@@ -13,6 +13,7 @@ if (isset($_SESSION['user_id'])) {
 }
 if (!$conn) {
     $error = "Koneksi database sedang bermasalah. Silahkan coba lagi nanti!!";
+} else {
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = trim($_POST['username']);
         $email = trim($_POST['email']);
@@ -57,6 +58,7 @@ if (!$conn) {
         }
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -121,7 +123,7 @@ if (!$conn) {
             <h2 class="text-light-green tracking-wide">DI-GADHU</h2>
         </div>
         <ul class="flex gap-6">
-            <li><a href="index.php" class="text-light-green font-medium mb-2">Beranda</a></li>
+            <li><a href="../index.html" class="text-light-green font-medium mb-2">Beranda</a></li>
         </ul>
     </nav>
 
