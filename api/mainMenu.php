@@ -63,11 +63,11 @@ $conn->close();
                             <?php if ($role === 'admin'): ?>
                                 <li><a href="adminDash.php"><i class="fas fa-tachometer-alt"></i> Dashboard Admin</a></li>
                             <?php endif; ?>
-                            <li><a href="../api/logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                            <li><a href="logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
                         </ul>
                     </li>
                 <?php else: ?>
-                    <li><a href="../api/login.php">Login</a></li>
+                    <li><a href="login.php">Login</a></li>
                 <?php endif; ?>
             </ul>
     </nav>
