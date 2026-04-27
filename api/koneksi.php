@@ -25,4 +25,9 @@ if ($conn) {
     $handler = new MySQLSessionHandler($conn);
     session_set_save_handler($handler, true);
 }
+if ($conn) {
+    error_log("Koneksi ke TiDB BERHASIL");
+} else {
+    error_log("Koneksi ke TiDB GAGAL")
+}
 ?>
