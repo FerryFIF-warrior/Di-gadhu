@@ -2,12 +2,12 @@
 session_start();
 
 if(!isset($_SESSION['user_id'])) {
-    header("Location: /Di-Gadhu/api/login.php");
+    header("Location: login.php");
     exit();
 }
 
 if ($_SESSION['role'] !== 'admin') {
-    header("Location: /Di-Gadhu/index.html");
+    header("Location: ../index.html");
     exit();
 }
 ?>
@@ -17,21 +17,21 @@ if ($_SESSION['role'] !== 'admin') {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel - Di-Gadhu</title>
-    <link rel="stylesheet" href="/Di-Gadhu/style.css">
-    <link rel="stylesheet" href="/Di-Gadhu/adminDash.css">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="../adminDash.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <!-- Navbar -->
     <nav>
         <div class="logo-web">
-            <img src="/Di-Gadhu/Resource/Logo2.png" alt="Logo">
+            <img src="../Resource/Logo2.png" alt="Logo">
             <h2>DI-GADHU</h2>
         </div>
         <ul class="navigasi">
             <li><a href="mainMenu.php">Beranda</a></li>
-            <li><a href="/Di-gadhu/analisis.HTML">Analisis</a></li>
-            <li><a href="/Di-gadhu/tanaman.HTML">Jenis Tanaman</a></li>
+            <li><a href="../analisis.HTML">Analisis</a></li>
+            <li><a href="../tanaman.HTML">Jenis Tanaman</a></li>
             <li class="user-menu">
                 <a href="#" class="user-profile">
                     <i class="fas fa-user-circle"></i> <?php echo htmlspecialchars($_SESSION['username']); ?>
@@ -66,6 +66,6 @@ if ($_SESSION['role'] !== 'admin') {
         </main>
     </div>
 
-    <script src="/Di-gadhu/adminDash.js"></script>
+    <script src="../adminDash.js"></script>
 </body>
 </html>
