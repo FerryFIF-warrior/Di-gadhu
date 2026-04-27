@@ -28,6 +28,6 @@ if ($conn) {
 if ($conn) {
     error_log("Koneksi ke TiDB BERHASIL");
 } else {
-    error_log("Koneksi ke TiDB GAGAL")
+    error_log("Koneksi ke TiDB GAGAL");
 }
 ?>
