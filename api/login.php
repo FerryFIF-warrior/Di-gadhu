@@ -1,11 +1,6 @@
 <?php
 session_start();
 require_once 'koneksi.php';
-if (!$conn) {
-    $error = "Koneksi database bermasalah. silahkan cobalagi nanti!!";
-
-    goto skip_db_process;
-} 
 
 skip_db_process:
 
@@ -19,49 +14,52 @@ if (isset($_SESSION['user_id'])) {
 }
 
 $error = '';
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST['username']);
-    $password = $_POST['password'];
-    $remember = isset($_POST['remember']);
-
-    if (empty($username) || empty($password)) {
-        $error = "Username/email dan password harus diisi!";
-    } else {
-        
-        $stmt = $conn->prepare("SELECT id, username, email, password, role FROM login WHERE username = ? OR email = ?");
-        $stmt->bind_param("ss", $username, $username);
-        $stmt->execute();
-        $result = $stmt->get_result();
-
-        if ($result->num_rows === 1) {
-            $user = $result->fetch_assoc();
-
-            if (password_verify($password, $user['password'])) {
-                $_SESSION['user_id'] = $user['id'];
-                $_SESSION['username'] = $user['username'];
-                $_SESSION['user_email'] = $user['email'];
-                $_SESSION['role'] = $user['role'];
-
-                if ($remember) {
-                    setcookie("user_login", $user['id'], time() + (86400 * 30), "/");
-                }
-
-                //redirec
-                if ($user['role'] === 'admin') {
-                    header("Location: admindash.php");
+if (!$conn) {
+    $error = "Koneksi database bermasalah. silahkan cobalagi nanti!!";
+} else {
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $username = trim($_POST['username']);
+        $password = $_POST['password'];
+        $remember = isset($_POST['remember']);
+    
+        if (empty($username) || empty($password)) {
+            $error = "Username/email dan password harus diisi!";
+        } else {
+            
+            $stmt = $conn->prepare("SELECT id, username, email, password, role FROM login WHERE username = ? OR email = ?");
+            $stmt->bind_param("ss", $username, $username);
+            $stmt->execute();
+            $result = $stmt->get_result();
+    
+            if ($result->num_rows === 1) {
+                $user = $result->fetch_assoc();
+    
+                if (password_verify($password, $user['password'])) {
+                    $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['username'] = $user['username'];
+                    $_SESSION['user_email'] = $user['email'];
+                    $_SESSION['role'] = $user['role'];
+    
+                    if ($remember) {
+                        setcookie("user_login", $user['id'], time() + (86400 * 30), "/");
+                    }
+    
+                    //redirec
+                    if ($user['role'] === 'admin') {
+                        header("Location: admindash.php");
+                    } else {
+                        header("Location: mainMenu.php");
+                    }
+                    exit();
+    
                 } else {
-                    header("Location: mainMenu.php");
+                    $error = "Username/email atau password salah!";
                 }
-                exit();
-
             } else {
                 $error = "Username/email atau password salah!";
             }
-        } else {
-            $error = "Username/email atau password salah!";
+            $stmt->close();
         }
-        $stmt->close();
     }
 }
 ?>
@@ -176,7 +174,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             <p class="text-center text-gray-600 mt-6">
                 Belum punya akun?
-                <a href="register.php" class="text-forest-green font-semibold hover:underline">Daftar</a>
+                <a href="Register.php" class="text-forest-green font-semibold hover:underline">Daftar</a>
             </p>
         </div>
     </div>
