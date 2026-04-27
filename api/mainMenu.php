@@ -48,7 +48,7 @@ if (!$isLoggedIn && isset($_COOKIE['user_login'])) {
             <h2>DI-GADHU</h2>
         </div>
             <ul class="navigasi">
-                <li><a href="../budidaya.html">Budidaya</a></li>
+                <li><a href="budidaya.php">Budidaya</a></li>
                 <li><a href="../analisis.HTML">Analisis</a></li>
                 <li><a href="../tanaman.HTML">Jenis Tanaman</a></li>
                 <?php if ($isLoggedIn): ?>
