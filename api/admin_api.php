@@ -1,5 +1,7 @@
 <?php
+require_once 'koneksi.php';
 session_start();
+
 header('Content-Type: application/json');
 
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
@@ -7,8 +9,6 @@ if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     echo json_encode(['error' => 'Unauthorized']);
     exit();
 }
-
-require_once 'koneksi.php';
 
 $action = $_GET['action'] ?? '';
 $method = $_SERVER['REQUEST_METHOD'];
