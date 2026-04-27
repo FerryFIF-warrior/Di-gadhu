@@ -1,6 +1,6 @@
 <?php
-session_start();
 require_once'koneksi.php';
+session_start();
 
 $isLoggedIn = isset($_SESSION['user_id']);
 $username = $_SESSION['username'] ?? '';
@@ -28,7 +28,6 @@ if (!$isLoggedIn && isset($_COOKIE['user_login'])) {
 
     $stmt->close();
 }
-$conn->close();
 ?>
 
 <!DOCTYPE html>
