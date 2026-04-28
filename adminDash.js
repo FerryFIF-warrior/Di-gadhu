@@ -8,7 +8,7 @@ async function apiCall(action, method = 'GET', body = null) {
     if (body) options.body = JSON.stringify(body);
 
     try {
-        const response = await fetch(`api/admin_api.php?action=${action}`, options);
+        const response = await fetch(`/api/admin_api.php?action=${action}`, options);
         console.log(`[DEBUG] ${action} - HTTP Status:`, response.status);
 
         if (!response.ok) {
@@ -238,7 +238,7 @@ async function editUser(id) {
 
 async function hapusUser(id) {
     if (confirm('Hapus user ini?')) {
-        const res = await fetch(`api/admin_api.php?action=hapus_user`, {
+        const res = await fetch(`/api/admin_api.php?action=hapus_user`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id }),
