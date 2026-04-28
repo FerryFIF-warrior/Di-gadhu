@@ -1,14 +1,36 @@
 // adminDash.js - Versi terbaru dengan debug
 async function apiCall(action, method = 'GET', body = null) {
-    const options = { method, headers: { 'Content-Type': 'application/json' }, credentials: 'include'};
+    const options = {
+        method,
+        headers: { 'Content-Type': 'application/json' },
+        credentials: 'include'
+    };
     if (body) options.body = JSON.stringify(body);
-    const response = await fetch(`api/admin_api.php?action=${action}`, options);
 
-    if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error | 'Request gagal');
+    try {
+        const response = await fetch(`api/admin_api.php?action=${action}`, options);
+        console.log(`[DEBUG] ${action} - HTTP Status:`, response.status);
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error(`[ERROR] ${action} - Response body:`, errorText);
+            throw new Error(`HTTP ${response.status}: ${errorText.substring(0, 200)}`);
+        }
+
+        const contentType = response.headers.get("content-type");
+        if (!contentType || !contentType.includes("application/json")) {
+            const text = await response.text();
+            console.error(`[ERROR] ${action} - Bukan JSON, isi awal:`, text.substring(0, 200));
+            throw new Error("API tidak mengembalikan JSON. Cek error PHP.");
+        }
+
+        const jsonData = await response.json();
+        console.log(`[DEBUG] ${action} - Data berhasil di-parse:`, jsonData);
+        return jsonData;
+    } catch (err) {
+        console.error(`[FATAL] ${action} - Gagal memanggil API:`, err);
+        throw err;
     }
-    return response.json();
 }
 
 function escapeHtml(str) {
