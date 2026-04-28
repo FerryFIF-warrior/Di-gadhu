@@ -4,15 +4,15 @@ session_start();
 
 header('Content-Type: application/json');
 
-if (!$conn) {
-    http_response_code(500);
-    echo json_encode(['error' => 'Koneksi database gagal']);
-    exit();
-}
-
 if (!isset($_SESSION['user_id']) || $_SESSION['role'] !== 'admin') {
     http_response_code(403);
     echo json_encode(['error' => 'Unauthorized']);
+    exit();
+}
+
+if (!$conn) {
+    http_response_code(500);
+    echo json_encode(['error' => 'Koneksi database gagal']);
     exit();
 }
 
