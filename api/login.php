@@ -1,69 +1,69 @@
 <?php
 require_once 'koneksi.php';
 session_set_cookie_params([
-                          'path' => '/',
-                          'domain' => '.vercel.app',
-                          'secure' => true,
-                          'httponly' => true,
-                          'samesite' => 'Lax'
+    'path' => '/',
+    'domain' => '.vercel.app',
+    'secure' => true,
+    'httponly' => true,
+    'samesite' => 'Lax'
 ]);
 session_start();
-
-skip_db_process:
 
 if (isset($_SESSION['user_id'])) {
     if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin') {
         header("Location: adminDash.php");
+        exit();
     } else {
         header("Location: mainMenu.php");
+        exit();
     }
-    exit();
 }
 
 $error = '';
-if (!$conn) {
-    $error = "Koneksi database bermasalah. silahkan cobalagi nanti!!";
-} else {
-    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    
+    if (!$conn) {
+        $error = "Koneksi database bermasalah. Silakan coba lagi nanti.";
+        error_log("Login error: koneksi database gagal");
+    } else {
         $username = trim($_POST['username']);
         $password = $_POST['password'];
         $remember = isset($_POST['remember']);
-    
+
         if (empty($username) || empty($password)) {
             $error = "Username/email dan password harus diisi!";
         } else {
-            
             $stmt = $conn->prepare("SELECT id, username, email, password, role FROM login WHERE username = ? OR email = ?");
             $stmt->bind_param("ss", $username, $username);
             $stmt->execute();
             $result = $stmt->get_result();
-    
+
             if ($result->num_rows === 1) {
                 $user = $result->fetch_assoc();
-    
                 if (password_verify($password, $user['password'])) {
                     $_SESSION['user_id'] = $user['id'];
                     $_SESSION['username'] = $user['username'];
                     $_SESSION['user_email'] = $user['email'];
                     $_SESSION['role'] = $user['role'];
-    
+
                     if ($remember) {
                         setcookie("user_login", $user['id'], time() + (86400 * 30), "/");
                     }
-    
-                    //redirec
+
                     if ($user['role'] === 'admin') {
                         header("Location: adminDash.php");
                     } else {
                         header("Location: mainMenu.php");
                     }
                     exit();
-    
                 } else {
                     $error = "Username/email atau password salah!";
+                    error_log("Login gagal: password salah untuk username/email: $username");
                 }
             } else {
                 $error = "Username/email atau password salah!";
+                error_log("Login gagal: user tidak ditemukan: $username");
             }
             $stmt->close();
         }
