@@ -1,13 +1,5 @@
 <?php
 require_once 'koneksi.php';
-
-session_set_cookie_params([
-                          'path' => '/',
-                          'domain' => '.vercel.app',
-                          'secure' => true,
-                          'httponly' => true,
-                          'samesite' => 'Lax'
-]);
 session_start();
 
 header('Content-Type: application/json');
